@@ -1,0 +1,106 @@
+<div class="py-4 px-4">
+  <h4 class="mb-3 text-center">Calculate Tip</h4>
+  <form (ngSubmit)="calculateTip()">
+    <div class="mb-3">
+      <label for="bill" class="form-label">Bill Amount</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text">₹</span>
+        <input
+          type="number"
+          #myBill="ngModel"
+          class="form-control"
+          id="bill"
+          placeholder="Enter bill amount"
+          name="bill"
+          [(ngModel)]="tip.bill"
+        />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="percentage" class="form-label">Percentage</label>
+      <select
+        *ngIf="!customPercent"
+        class="form-select"
+        id="floatingSelect"
+        aria-label="Floating label select example"
+        name="percentage"
+        [(ngModel)]="tip.percentage"
+      >
+        <option selected hidden disabled [ngValue]="0">
+          Select Percentage(%)
+        </option>
+        <option [ngValue]="10">10%</option>
+        <option [ngValue]="15">15%</option>
+        <option [ngValue]="20">20%</option>
+      </select>
+      <div class="input-group" *ngIf="customPercent">
+        <input
+          type="number"
+          class="form-control"
+          min="0"
+          max="100"
+          name="percentage"
+          [(ngModel)]="tip.percentage"
+        />
+        <span class="input-group-text">%</span>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input
+        type="checkbox"
+        class="form-check-input border-dark"
+        id="customPercent"
+        name="customPercent"
+        [(ngModel)]="customPercent"
+      />
+      <label class="form-check-label" for="customPercent"
+        >Enter custom percentage</label
+      >
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary btn-md mb-3">Calculate</button>
+    </div>
+    <div>
+      <label for="tip" class="form-label">Tip To Be Given</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text">₹</span>
+        <input
+          type="number"
+          class="form-control"
+          id="tip"
+          #myTip="ngModel"
+          [(ngModel)]="tip.tip"
+          name="tip"
+        />
+      </div>
+    </div>
+    <div
+      class="text-center mt-3"
+      *ngIf="myTip.value > 0 && myBill.value > 0 && myTip.value < myBill.value"
+    >
+      <button
+        class="btn btn-success btn-md border-primary"
+        (click)="registerTip()"
+      >
+        Tip Given
+      </button>
+    </div>
+    <div class="mt-3 text-center">
+      <button
+        class="btn btn-link btn-sm"
+        (click)="showHistory()"
+        *ngIf="!doShowHistory"
+      >
+        (Show History)
+      </button>
+      <button
+        class="btn btn-link btn-sm"
+        (click)="showHistory()"
+        *ngIf="doShowHistory"
+      >
+        (Hide History)
+      </button>
+    </div>
+  </form>
+</div>

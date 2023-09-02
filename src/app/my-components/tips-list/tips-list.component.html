@@ -1,0 +1,21 @@
+<div class="py-4 px-4">
+  <h4 class="mb-4 text-center">History</h4>
+  <table class="table table-hover table-bordered table-sm">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">Bill</th>
+        <th scope="col">Tip</th>
+        <th scope="col">%</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let tip of tipsList">
+      <tr>
+        <td>₹{{ tip.bill }}</td>
+        <td>₹{{ tip.tip }}</td>
+        <td>{{ tip.percentage }}%</td>
+        <td>{{ tip.date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
