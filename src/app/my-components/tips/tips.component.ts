@@ -12,7 +12,7 @@ export class TipsComponent {
   doShowHistory: boolean = false;
 
   constructor() {
-    this.localItem = localStorage.getItem('tips');
+    this.localItem = sessionStorage.getItem('tips');
     if (this.localItem == null) {
       this.tips = [];
     } else {
@@ -21,7 +21,7 @@ export class TipsComponent {
   }
   tipAdd(tip: TipElement) {
     this.tips.unshift(tip);
-    localStorage.setItem('tips', JSON.stringify(this.tips));
+    sessionStorage.setItem('tips', JSON.stringify(this.tips));
   }
 
   showHistory(value:boolean){
