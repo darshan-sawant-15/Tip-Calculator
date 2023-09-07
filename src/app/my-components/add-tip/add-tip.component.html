@@ -1,6 +1,6 @@
 <div class="py-4 px-4">
   <h4 class="mb-3 text-center">Calculate Tip</h4>
-  <form (ngSubmit)="calculateTip()">
+  <form>
     <div class="mb-3">
       <label for="bill" class="form-label">Bill Amount</label>
       <div class="input-group mb-3">
@@ -24,6 +24,7 @@
         id="floatingSelect"
         aria-label="Floating label select example"
         name="percentage"
+        #myPercentage="ngModel"
         [(ngModel)]="tip.percentage"
       >
         <option selected hidden disabled [ngValue]="0">
@@ -40,6 +41,7 @@
           min="0"
           max="100"
           name="percentage"
+          #myPercentage="ngModel"
           [(ngModel)]="tip.percentage"
         />
         <span class="input-group-text">%</span>
@@ -53,13 +55,20 @@
         id="customPercent"
         name="customPercent"
         [(ngModel)]="customPercent"
+        (ngModelChange)="customPercentChange($event)"
       />
       <label class="form-check-label" for="customPercent"
         >Enter custom percentage</label
       >
     </div>
     <div class="text-center">
-      <button class="btn btn-primary btn-md mb-3">Calculate</button>
+      <button
+        class="btn btn-primary btn-md mb-3"
+        (click)="calculateTip()"
+        [disabled]="tip.percentage == 0"
+      >
+        Calculate
+      </button>
     </div>
     <div>
       <label for="tip" class="form-label">Tip To Be Given</label>
@@ -81,6 +90,7 @@
     >
       <button
         class="btn btn-success btn-md border-primary"
+        type="submit"
         (click)="registerTip()"
       >
         Tip Given

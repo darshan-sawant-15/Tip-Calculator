@@ -8,23 +8,30 @@ import { TipElement } from 'src/app/TipElement';
 })
 export class TipsComponent {
   tips!: TipElement[];
-  localItem!: string|null;
+  localItem!: string | null;
   doShowHistory: boolean = false;
+  tipGiven:boolean = false;
 
   constructor() {
-    this.localItem = sessionStorage.getItem('tips');
+    this.getTips();
+  }
+  tipAdd(tip: TipElement) {
+    this.tips.unshift(tip);
+    localStorage.setItem('tips', JSON.stringify(this.tips));
+    this.tipGiven=true;
+    this.getTips();
+  }
+
+  showHistory(value: boolean) {
+    this.doShowHistory = value;
+  }
+
+  getTips() {
+    this.localItem = localStorage.getItem('tips');
     if (this.localItem == null) {
       this.tips = [];
     } else {
       this.tips = JSON.parse(this.localItem);
     }
-  }
-  tipAdd(tip: TipElement) {
-    this.tips.unshift(tip);
-    sessionStorage.setItem('tips', JSON.stringify(this.tips));
-  }
-
-  showHistory(value:boolean){
-    this.doShowHistory = value;
   }
 }
