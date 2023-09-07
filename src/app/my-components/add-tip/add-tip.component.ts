@@ -20,7 +20,7 @@ export class AddTipComponent {
   };
   customPercent: boolean = false;
   //to store custom percentage while the checkbox is unchecked
-  tempPercent!: number;
+  tempPercent: number=0;
 
   calculateTip() {
     if (this.tip.bill != 0 && this.tip.percentage != 0) {
@@ -30,7 +30,7 @@ export class AddTipComponent {
 
   registerTip() {
     this.tip.date = new Date().toISOString().split('T')[0];
-    if (this.tip.percentage==0) {
+    if (this.tip.percentage == 0) {
       this.tip.percentage = (this.tip.tip * 100) / this.tip.bill;
       this.tip.percentage = Number.parseInt(this.tip.percentage.toFixed(2));
       this.tempPercent = this.tip.percentage;
@@ -48,10 +48,18 @@ export class AddTipComponent {
 
   customPercentChange(newValue: boolean) {
     if (newValue == false) {
-      this.tempPercent = this.tip.percentage;
-      this.tip.percentage = 0;
+      if (
+        this.tip.percentage != 10 &&
+        this.tip.percentage != 15 &&
+        this.tip.percentage != 20
+      ) {
+        this.tempPercent = this.tip.percentage;
+        this.tip.percentage = 0;
+      }
     } else {
-      this.tip.percentage = this.tempPercent;
+      if (this.tip.percentage == 0) {
+        this.tip.percentage = this.tempPercent;
+      }
     }
   }
 }
