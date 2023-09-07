@@ -30,9 +30,10 @@ export class AddTipComponent {
 
   registerTip() {
     this.tip.date = new Date().toISOString().split('T')[0];
-    if (this.customPercent == true) {
+    if (this.tip.percentage==0) {
       this.tip.percentage = (this.tip.tip * 100) / this.tip.bill;
       this.tip.percentage = Number.parseInt(this.tip.percentage.toFixed(2));
+      this.tempPercent = this.tip.percentage;
     }
     this.addTipEvent.emit(this.tip);
     if (this.customPercent == false) {
