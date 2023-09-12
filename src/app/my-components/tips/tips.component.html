@@ -7,7 +7,7 @@
         <app-add-tip (addTipEvent)="tipAdd($event)" (showHistoryEvent)="showHistory($event)"></app-add-tip>
       </div>
       <div class="card mt-3" *ngIf="doShowHistory">
-        <app-tips-list [tipsList]="tips"></app-tips-list>
+        <app-tips-list [tipsList]="tips" (clearHistoryEvent)="clearHistory()"></app-tips-list>
       </div>
     </div>
   </div>

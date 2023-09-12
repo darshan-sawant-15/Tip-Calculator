@@ -34,4 +34,9 @@ export class TipsComponent {
       this.tips = JSON.parse(this.localItem);
     }
   }
+
+  clearHistory(){
+    localStorage.removeItem('tips');
+    this.getTips();
+  }
 }

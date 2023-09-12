@@ -1,6 +1,6 @@
 <div class="py-4 px-4">
   <h4 class="mb-4 text-center">History</h4>
-  <table class="table table-hover table-bordered table-sm">
+  <table class="table table-hover table-bordered table-sm" *ngIf="tipsList.length>0">
     <thead>
       <tr class="table-dark">
         <th scope="col">Bill</th>
@@ -19,4 +19,9 @@
     </tbody>
 
   </table>
+  <div class="text-center" *ngIf="tipsList.length>0">
+    <button class="btn btn-sm btn-danger" (click)="clearHistory()">Clear History</button>
+  </div>
+
+  <div class="alert alert-warning text-center" *ngIf="tipsList.length==0">You haven't given any tips yet</div>
 </div>
